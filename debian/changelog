@@ -1,5 +1,49 @@
-template-repository (1.0-1) unstable; urgency=medium
+ppxlib (0.27.0-2) unstable; urgency=medium
 
-  * Initial release
+  * Bump deb-version to get around numbering issue.
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Julien Puydt <jpuydt@debian.org>  Tue, 11 Oct 2022 20:56:20 +0200
+
+ppxlib (0.27.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Fix d/watch.
+  * Bump Standards-Version to 4.6.1.
+
+ -- Julien Puydt <jpuydt@debian.org>  Mon, 15 Aug 2022 15:52:46 +0200
+
+ppxlib (0.24.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * Bump Standards-Version to 4.6.0
+  * Bump debian/watch version to 4
+
+ -- Stéphane Glondu <glondu@debian.org>  Thu, 20 Jan 2022 16:21:22 +0100
+
+ppxlib (0.15.0-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Stéphane Glondu <glondu@debian.org>  Sun, 08 Nov 2020 04:19:05 +0100
+
+ppxlib (0.14.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * Bump debhelper compat level to 13
+  * Bump Standards-Version to 4.5.0
+
+ -- Stéphane Glondu <glondu@debian.org>  Sat, 25 Jul 2020 14:30:18 +0200
+
+ppxlib (0.12.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * Bump Standards-Version to 4.4.1
+  * Add Rules-Requires-Root: no
+
+ -- Stéphane Glondu <glondu@debian.org>  Mon, 13 Jan 2020 16:51:12 +0100
+
+ppxlib (0.8.1-1) unstable; urgency=medium
+
+  * Initial release (Closes: #934890)
+
+ -- Stéphane Glondu <glondu@debian.org>  Wed, 28 Aug 2019 07:06:35 +0200
