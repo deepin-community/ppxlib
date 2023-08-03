@@ -118,7 +118,9 @@ module Reserved_namespaces = struct
   let reserve ns = Hashtbl.add_exn tbl ~key:ns ~data:()
   let () = reserve "merlin"
   let () = reserve "reason"
-  let () = reserve "refmt"
+  let () = reserve "refmt" (* reason *)
+  let () = reserve "ns" (* rescript *)
+  let () = reserve "res" (* rescript *)
   let () = reserve "metaocaml"
   let () = reserve "ocamlformat"
 
@@ -209,17 +211,21 @@ module Registrar = struct
           String.Map.add name t acc)
 
   let spellcheck t context ?(allowlist = []) name =
+    let all_for_context = get_all_for_context t context in
     let all =
-      let all = get_all_for_context t context in
-      String.Map.fold (fun key _ acc -> key :: acc) all.all []
+      String.Map.fold (fun key _ acc -> key :: acc) all_for_context.all []
     in
     match Spellcheck.spellcheck (all @ allowlist) name with
     | Some _ as x -> x
+    | None when String.Map.mem name all_for_context.all -> None
     | None -> (
         let other_contexts =
           Hashtbl.fold
-            (fun ctx { all } acc ->
-              if Poly.( <> ) context ctx && String.Map.mem name all then
+            (fun ctx all_from_context acc ->
+              if
+                Poly.( <> ) context ctx
+                && String.Map.mem name all_from_context.all
+              then
                 match t.string_of_context ctx with
                 | None -> acc
                 | Some s -> (s ^ "s") :: acc

@@ -1,6 +1,3 @@
-#require "base";;
-
-open Stdppx
 open Ppxlib
 
 let () = Driver.enable_checks ()
@@ -54,6 +51,12 @@ Error: Attribute `blah' was not used.
        used
        here in the context of a core type.
        Did you put it at the wrong level?
+|}]
+
+let _ = () [@blah]
+[%%expect{|
+Line _, characters 13-17:
+Error: Attribute `blah' was not used
 |}]
 
 (* Attribute drops *)

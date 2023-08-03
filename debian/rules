@@ -10,9 +10,10 @@ DESTDIR=$(CURDIR)/debian/tmp
 
 override_dh_auto_build:
 	dune build -p ppxlib
+	touch _build/default/ppxlib-bench.install
 
 override_dh_auto_install:
-	dune install --destdir=$(DESTDIR) --prefix=/usr --libdir=..$(OCAML_STDLIB_DIR)
+	dune install --destdir=$(DESTDIR) --prefix=/usr --libdir=$(OCAML_STDLIB_DIR)
 	rm -f $(DESTDIR)/usr/doc/ppxlib/LICENSE.md
 
 override_dh_auto_test:

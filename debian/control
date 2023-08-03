@@ -11,7 +11,7 @@ Build-Depends:
  libppx-derivers-ocaml-dev,
  libsexplib0-ocaml-dev,
  dh-ocaml
-Standards-Version: 4.6.1
+Standards-Version: 4.6.2
 Rules-Requires-Root: no
 Section: ocaml
 Homepage: https://github.com/ocaml-ppx/ppxlib

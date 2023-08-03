@@ -1,3 +1,17 @@
+ppxlib (0.30.0-2) unstable; urgency=medium
+
+  * Fix compilation with recent dune.
+
+ -- Julien Puydt <jpuydt@debian.org>  Thu, 06 Jul 2023 12:13:35 +0200
+
+ppxlib (0.30.0-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * Bump standards-version to 4.6.2.
+
+ -- Julien Puydt <jpuydt@debian.org>  Mon, 03 Jul 2023 11:01:18 +0200
+
 ppxlib (0.27.0-2) unstable; urgency=medium
 
   * Bump deb-version to get around numbering issue.
