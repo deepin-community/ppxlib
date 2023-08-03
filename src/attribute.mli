@@ -1,5 +1,3 @@
-(** Attribute hygiene *)
-
 (** This module provides hygiene for attributes. The goal is to report misuses
     of attributes to the user as soon as possible so that no mistyped attribute
     get silently ignored. *)
@@ -108,7 +106,9 @@ val declare :
     "foo.default" declared in the previous example, on this code it will match
     the [@foo.default 0] attribute:
 
-    {[ type t = { x : int [@default 42] [@foo.default 0] } ]}
+    {[
+      type t = { x : int [@default 42] [@foo.default 0] }
+    ]}
 
     This is to allow the user to specify a [@default] attribute for all
     re-writers that use it but still put a specific one for one specific
@@ -126,6 +126,14 @@ val declare_with_name_loc :
   ('a, 'c) t
 (** Same as [declare] but the callback receives the location of the name of the
     attribute. *)
+
+val declare_with_attr_loc :
+  string ->
+  'a Context.t ->
+  (payload, 'b, 'c) Ast_pattern.t ->
+  (attr_loc:Location.t -> 'b) ->
+  ('a, 'c) t
+(** Same as [declare] but the callback receives the location of the attribute. *)
 
 val name : _ t -> string
 val context : ('a, _) t -> 'a Context.t
@@ -192,24 +200,24 @@ module Floating : sig
   val convert : ('a, 'b) t list -> 'a -> 'b option
 end
 
-val explicitly_drop : Ast_traverse.iter
+val explicitly_drop : Ast_traverse0.iter
 (** Code that is voluntarily dropped by a rewriter needs to be given to this
     object. All attributes inside will be marked as handled. *)
 
-val check_unused : Ast_traverse.iter
+val check_unused : Ast_traverse0.iter
 (** Raise if there are unused attributes. *)
 
-val collect_unused_attributes_errors : Location.Error.t list Ast_traverse.fold
+val collect_unused_attributes_errors : Location.Error.t list Ast_traverse0.fold
 (** Collect all errors due to unused attributes. *)
 
-val collect : Ast_traverse.iter
+val collect : Ast_traverse0.iter
 (** Collect all attribute names. To be used in conjunction with
     {!check_all_seen}. *)
 
 val collect_unseen_errors : unit -> Location.Error.t list
 
 val check_all_seen : unit -> unit
-(** Check that all attributes collected by {!freshen_and_collect} have been:
+(** Check that all attributes collected by {!collect_unseen_errors} have been:
 
     - matched at least once by one of: {!get}, {!consume} or {!Floating.convert}
     - seen by [check_unused] (to allow allowlisted attributed to pass through)
